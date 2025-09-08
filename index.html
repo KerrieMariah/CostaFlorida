@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Space - Help Us Create a Space that Matters</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: white;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            transition: all 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        .contact-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact {
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .email-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .email-btn:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 100px 20px 20px 20px;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .text-content {
+            text-align: left;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-description {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 40px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .donation-form {
+            background: #F7C52D;
+            padding: 40px 35px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .form-title {
+            color: black;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+            background: white;
+            color: #333;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #999;
+            font-weight: 400;
+        }
+
+        /* Costa Florida Style Donation Inputs */
+        .amount-section {
+            margin-bottom: 20px;
+        }
+
+        .amount-label {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: black;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .amount-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .amount-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #333;
+            padding: 12px 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #333;
+            text-align: center;
+        }
+
+        .amount-btn:hover,
+        .amount-btn.active {
+            border-color: black;
+            background: black;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .custom-amount {
+            margin-bottom: 15px;
+        }
+
+        .custom-amount label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: black;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .amount-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .amount-input:focus {
+            outline: none;
+            border-color: black;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .donate-button {
+            width: 100%;
+            padding: 15px;
+            background: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .donate-button:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-section {
+            margin-top: 80px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .vision-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .intro-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-style: italic;
+        }
+
+        .vision-statement {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 400;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            font-style: italic;
+        }
+
+        .offerings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .offering {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .offering-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin: 0 auto 15px auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .offering:hover .offering-image {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 15px rgba(247, 197, 45, 0.6));
+        }
+
+        .offering h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .offering p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            line-height: 1.5;
+        }
+
+        .authenticity-statement {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            font-style: italic;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #F7C52D;
+        }
+
+        .what-building {
+            margin-bottom: 60px;
+        }
+
+        .why-support {
+            margin-bottom: 60px;
+        }
+
+        .support-list {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .support-list li {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid #F7C52D;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .support-list li::before {
+            content: "✨ ";
+            margin-right: 8px;
+        }
+
+        .movement-section {
+            text-align: center;
+        }
+
+        .movement-intro {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .movement-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            margin-bottom: 25px;
+        }
+
+        .final-call {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.7;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            background: rgba(247, 197, 45, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #F7C52D;
+        }
+
+        /* Partner With Us Section */
+        .partner-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px 0;
+        }
+
+        .partner-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #F7C52D, #FFD700);
+            color: black;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(247, 197, 45, 0.3);
+            border: 2px solid transparent;
+        }
+
+        .partner-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(247, 197, 45, 0.5);
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            border: 2px solid white;
+            color: black;
+        }
+
+        .partner-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .contact-section {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .contact {
+                font-size: 0.9rem;
+            }
+
+            .email-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .main-content {
+                padding: 180px 15px 20px 15px;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .main-title {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1.8rem;
+            }
+
+            .donation-form {
+                padding: 30px 25px;
+                max-width: 100%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .amount-buttons {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .amount-btn {
+                padding: 10px 6px;
+                font-size: 0.8rem;
+            }
+
+            .about-section {
+                margin-top: 60px;
+                padding: 30px 15px;
+            }
+
+            .intro-text {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .offerings-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .offering {
+                padding: 20px;
+            }
+
+            .offering-image {
+                width: 50px;
+                height: 50px;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .partner-button {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 200px 10px 20px 10px;
+            }
+
+            .content-wrapper {
+                text-align: center;
+            }
+
+            .text-content {
+                text-align: center;
+            }
+
+            .main-title {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .subtitle {
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            .hero-description {
+                text-align: center;
+            }
+
+            .donation-form {
+                padding: 25px 20px;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+            }
+
+            .form-input {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+
+            .donate-button {
+                padding: 12px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .animate-fadeInLeft {
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 1s ease-out 0.3s both;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted playsinline>
+        <source src="./assets/background.mp4" type="video/mp4">
+        <!-- Fallback for browsers that don't support video -->
+        Your browser does not support the video tag.
+    </video>
+
+    <header class="header">
+        <img src="./assets/logo.png" alt="Logo" class="logo-img">
+        <div class="contact-section">
+            <div class="contact">(239) 289-5536</div>
+            <a href="mailto:contact@charity.org" class="email-btn">Email Us</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="text-content animate-fadeInLeft">
+                <h1 class="main-title">Help Us Create a Sacred Space</h1>
+                <h2 class="subtitle">for Authentic Connection</h2>
+                <p class="hero-description">A Place Where Spirit Meets Community</p>
+            </div>
+
+            <div class="donation-form animate-fadeInRight">
+                <h3 class="form-title">DONATE NOW</h3>
+                <form id="donationForm">
+                    <!-- Costa Florida Style Amount Selection -->
+                    <div class="amount-section">
+                        <label class="amount-label">Choose Donation Amount:</label>
+                        <div class="amount-buttons">
+                            <button type="button" class="amount-btn" data-amount="25">$25</button>
+                            <button type="button" class="amount-btn" data-amount="50">$50</button>
+                            <button type="button" class="amount-btn" data-amount="100">$100</button>
+                            <button type="button" class="amount-btn" data-amount="200">$200</button>
+                            <button type="button" class="amount-btn" data-amount="500">$500</button>
+                            <button type="button" class="amount-btn" data-amount="1000">$1000</button>
+                        </div>
+                        <div class="custom-amount">
+                            <label for="customAmount">Or enter a custom amount:</label>
+                            <input 
+                                type="number" 
+                                id="customAmount" 
+                                class="amount-input" 
+                                placeholder="$"
+                                min="1"
+                                step="1"
+                                required
+                            >
+                        </div>
+                    </div>
+
+
+                    <div class="form-group full-width">
+                        <input type="text" class="form-input" placeholder="Email" required>
+                    </div>
+                    <button type="submit" class="donate-button">DONATE</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <section class="about-section animate-fadeInUp">
+        <div class="vision-section">
+            <p class="intro-text">
+                In a world of manufactured wellness and surface-level spirituality, we're creating something different. Something real.
+            </p>
+            <p class="vision-statement">
+                Our vision: A sacred gathering space dedicated to authentic spiritual practice, deep community connection, and genuine healing—free from the artificial, the commercial, and the superficial.
+            </p>
+        </div>
+
+        <div class="what-building">
+            <h2 class="section-title">What We're Building</h2>
+            <p class="section-intro">A sanctuary for the soul where ancient wisdom meets modern community needs:</p>
+            
+            <div class="offerings-grid">
+                <div class="offering">
+                    <img src="./assets/cacao.png" alt="Cacao Ceremonies" class="offering-image">
+                    <h3>Cacao Ceremonies</h3>
+                    <p>that open hearts and create genuine connection</p>
+                </div>
+                <div class="offering">
+                    <img src="./assets/kundalini.png" alt="Kundalini Practices" class="offering-image">
+                    <h3>Kundalini Practices</h3>
+                    <p>to awaken your inner power and clarity</p>
+                </div>
+                <div class="offering">
+                    <img src="./assets/crystal.png" alt="Crystal Healing Circles" class="offering-image">
+                    <h3>Crystal Healing Circles</h3>
+                    <p>grounded in tradition, not trends</p>
+                </div>
+                <div class="offering">
+                    <img src="./assets/community.png" alt="Community Gatherings" class="offering-image">
+                    <h3>Community Gatherings</h3>
+                    <p>that foster real relationships and mutual support</p>
+                </div>
+                <div class="offering">
+                    <img src="./assets/wellness.png" alt="Wellness Workshops" class="offering-image">
+                    <h3>Wellness Workshops</h3>
+                    <p>focused on authentic transformation, not quick fixes</p>
+                </div>
+            </div>
+            
+            <p class="authenticity-statement">
+                This isn't boutique spirituality with a designer price tag. This is the real thing—practices that have healed and connected humans for thousands of years, made accessible to everyone seeking genuine growth and community.
+            </p>
+        </div>
+
+        <div class="why-support">
+            <h2 class="section-title">Why Your Support Matters</h2>
+            <p class="section-intro">Real transformation requires real space. Your donation helps us:</p>
+            
+            <ul class="support-list">
+                <li>Secure and maintain a dedicated venue for our community</li>
+                <li>Provide sliding-scale access so finances never block spiritual growth</li>
+                <li>Stock authentic ceremonial cacao and traditional healing tools</li>
+                <li>Support experienced facilitators who prioritize depth over profit</li>
+                <li>Create a judgment-free zone where everyone can explore their spiritual path</li>
+            </ul>
+        </div>
+
+        <div class="movement-section">
+            <h2 class="section-title">Join the Movement</h2>
+            <p class="movement-intro">This is more than an event space—it's a return to what matters.</p>
+            <p class="movement-text">
+                In a culture obsessed with external perfection, we're choosing inner truth. While others sell spiritual quick-fixes, we're cultivating lasting transformation. Where the wellness industry profits from insecurity, we're building genuine self-love and community connection.
+            </p>
+            <p class="final-call">
+                Your contribution isn't just funding a space—it's investing in authentic human connection, real healing, and the kind of spirituality that actually changes lives.
+            </p>
+        </div>
+
+        <!-- Partner With Us Section -->
+        <div class="partner-section">
+            <a href="mailto:partners@sacredspace.org?subject=Partnership Inquiry&body=Hello! I'm interested in partnering with your sacred space community. Please let me know more about partnership opportunities." class="partner-button">
+                Partner with Us
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Costa Florida Style Amount Button Selection
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.amount-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.style.transform = '';
+                });
+                
+                // Add active class to clicked button with bounce effect
+                this.classList.add('active');
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                }, 100);
+                
+                // Set the custom input value
+                document.getElementById('customAmount').value = this.dataset.amount;
+            });
+
+            // Add hover effects
+            btn.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.transform = 'translateY(-2px) scale(1.02)';
+                }
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.transform = '';
+                }
+            });
+        });
+
+        // Custom amount input handling
+        document.getElementById('customAmount').addEventListener('input', function() {
+            // Remove active class from all preset buttons when typing custom amount
+            document.querySelectorAll('.amount-btn').forEach(b => {
+                b.classList.remove('active');
+                b.style.transform = '';
+            });
+        });
+
+        // Form submission handling
+        document.getElementById('donationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const amount = document.getElementById('customAmount').value;
+            const firstName = this.querySelector('input[placeholder="First Name"]').value;
+            
+            if (!amount || amount <= 0) {
+                alert('Please select or enter a donation amount.');
+                return;
+            }
+            
+            // Success animation
+            const button = this.querySelector('.donate-button');
+            const originalText = button.textContent;
+            
+            button.textContent = 'PROCESSING...';
+            button.style.background = '#4CAF50';
+            
+            setTimeout(() => {
+                button.textContent = 'THANK YOU!';
+                setTimeout(() => {
+                    alert(`Thank you ${firstName}! Your donation of $${amount} will help African children get the education they deserve. 🙏❤️`);
+                    button.textContent = originalText;
+                    button.style.background = 'black';
+                    this.reset();
+                }, 1500);
+            }, 1000);
+        });
+
+        // Smooth scroll animations on load
+        window.addEventListener('load', function() {
+            const animateElements = document.querySelectorAll('[class*="animate-"]');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            animateElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
